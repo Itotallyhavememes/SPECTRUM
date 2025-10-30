@@ -1,0 +1,474 @@
+fileFormatVersion: 2
+guid: d347aad9f4d626b4a8e2920d5f97c1c2
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: 1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: coin_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7691fd7caebdc7042bbfba2504612ed3
+      internalID: -1018199645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coin_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e5e75a5ddce1b1459f6197c541e1150
+      internalID: -1179576929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coin_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99643ae63d12a714aaae615bdda198ab
+      internalID: 1055570553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coin_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00e7c202d35f7fa42a9fb790ce5e1b40
+      internalID: 1021833875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coin_4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d073f2fd55406e4db5c9bb3b7722b31
+      internalID: 1371286231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coin_5
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c513898033be61a4bb450879d88b6b39
+      internalID: 780820613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coin_6
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d315383237deb244975c4344c589451
+      internalID: -568592205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coin_7
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab17c84616fba54478bb896e8851a598
+      internalID: 1510188472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coin_8
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f58f2c09cdf4b442832b64e3f195ffc
+      internalID: -1853446261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coin_9
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6e0cdf03de0a894fbdda0065636fd46
+      internalID: 1188427052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coin_10
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae868ea3595f24f41a816d49dbb4a921
+      internalID: 180444063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coin_11
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 494a0b6e1cbada9468b263eb7b1cf3c1
+      internalID: 741570284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline:
+    - - {x: -91, y: 7}
+      - {x: -95, y: 3}
+      - {x: -95, y: -3}
+      - {x: -91, y: -7}
+      - {x: -82, y: -7}
+      - {x: -81, y: -3}
+      - {x: -81, y: 6}
+      - {x: -85, y: 7}
+    - - {x: -74, y: 7}
+      - {x: -78, y: 3}
+      - {x: -78, y: -3}
+      - {x: -74, y: -7}
+      - {x: -70, y: -7}
+      - {x: -66, y: -3}
+      - {x: -66, y: 3}
+      - {x: -70, y: 7}
+    - - {x: -58, y: 7}
+      - {x: -61, y: 4}
+      - {x: -61, y: -4}
+      - {x: -58, y: -7}
+      - {x: -54, y: -7}
+      - {x: -51, y: -4}
+      - {x: -51, y: 4}
+      - {x: -54, y: 7}
+    - - {x: -41, y: 7}
+      - {x: -44, y: 4}
+      - {x: -44, y: -4}
+      - {x: -41, y: -7}
+      - {x: -39, y: -7}
+      - {x: -36, y: -4}
+      - {x: -36, y: 4}
+      - {x: -39, y: 7}
+    - - {x: -26, y: 7}
+      - {x: -29, y: 6}
+      - {x: -29, y: -4}
+      - {x: -26, y: -7}
+      - {x: -22, y: -7}
+      - {x: -19, y: -4}
+      - {x: -19, y: 4}
+      - {x: -20, y: 7}
+    - - {x: -10, y: 7}
+      - {x: -14, y: 3}
+      - {x: -14, y: -3}
+      - {x: -10, y: -7}
+      - {x: -6, y: -7}
+      - {x: -2, y: -3}
+      - {x: -2, y: 3}
+      - {x: -6, y: 7}
+    - - {x: 5, y: 7}
+      - {x: 1, y: 3}
+      - {x: 1, y: -3}
+      - {x: 5, y: -7}
+      - {x: 11, y: -7}
+      - {x: 15, y: -3}
+      - {x: 15, y: 3}
+      - {x: 11, y: 7}
+    - - {x: 18, y: 3}
+      - {x: 18, y: -3}
+      - {x: 20, y: -7}
+      - {x: 26, y: -7}
+      - {x: 30, y: -5}
+      - {x: 30, y: 3}
+      - {x: 26, y: 7}
+      - {x: 22, y: 7}
+    - - {x: 38, y: 7}
+      - {x: 35, y: 4}
+      - {x: 35, y: -4}
+      - {x: 38, y: -7}
+      - {x: 44, y: -7}
+      - {x: 45, y: -4}
+      - {x: 45, y: 6}
+      - {x: 42, y: 7}
+    - - {x: 55, y: 7}
+      - {x: 52, y: 4}
+      - {x: 52, y: -4}
+      - {x: 55, y: -7}
+      - {x: 59, y: -7}
+      - {x: 60, y: -4}
+      - {x: 60, y: 6}
+      - {x: 57, y: 7}
+    - - {x: 70, y: 7}
+      - {x: 67, y: 4}
+      - {x: 67, y: -4}
+      - {x: 70, y: -7}
+      - {x: 76, y: -7}
+      - {x: 77, y: -4}
+      - {x: 77, y: 6}
+      - {x: 74, y: 7}
+    - - {x: 86, y: 7}
+      - {x: 82, y: 3}
+      - {x: 82, y: -3}
+      - {x: 86, y: -7}
+      - {x: 90, y: -7}
+      - {x: 94, y: -3}
+      - {x: 94, y: 3}
+      - {x: 90, y: 7}
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 1537655665
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      coin_0: -1018199645
+      coin_1: -1179576929
+      coin_10: 180444063
+      coin_11: 741570284
+      coin_2: 1055570553
+      coin_3: 1021833875
+      coin_4: 1371286231
+      coin_5: 780820613
+      coin_6: -568592205
+      coin_7: 1510188472
+      coin_8: -1853446261
+      coin_9: 1188427052
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
