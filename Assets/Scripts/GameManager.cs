@@ -1,4 +1,6 @@
 using FishNet.Object;
+using HeathenEngineering.SteamworksIntegration;
+using Steamworks;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,10 +21,11 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
         DontDestroyOnLoad(gameObject);
     }
     void Start()
-    {
+    {   
         //PlayerData tempDat = SaveManager.LoadGame(0);
 
         //if (tempDat != null)
@@ -54,6 +57,10 @@ public class GameManager : MonoBehaviour
         //    Debug.Log("Set coins 15");
         //    Debug.Log("Coins: " + playerData.inventorySystem.Get<int>("Coins"));
         //}
+    }
+    public static void QuitGame()
+    {
+        Application.Quit();
     }
 
     private void OnApplicationQuit()

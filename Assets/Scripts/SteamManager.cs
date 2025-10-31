@@ -2,12 +2,14 @@ using FishNet.Managing;
 using FishNet.Managing.Scened;
 using Steamworks;
 using System;
+using TMPro;
 using UnityEngine;
 
 public class SteamManager : MonoBehaviour
 {
     public static SteamManager instance;
 
+    [SerializeField] private TMP_Text LobbyTitle;
     [SerializeField] private NetworkManager netManager;
     [SerializeField] private FishySteamworks.FishySteamworks fishySteamworks;
     public NetworkManager GetNetManager() => netManager;
@@ -21,6 +23,7 @@ public class SteamManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+       
         DontDestroyOnLoad(gameObject);
 
     }
@@ -49,6 +52,8 @@ public class SteamManager : MonoBehaviour
         SteamMatchmaking.SetLobbyData(new CSteamID(lobbyID), "HostAddress", SteamUser.GetSteamID().ToString());
         SteamMatchmaking.SetLobbyData(new CSteamID(lobbyID), "name", $"{SteamFriends.GetPersonaName()}'s Lobby");
 
+        if (LobbyTitle) LobbyTitle.text = $"{SteamFriends.GetPersonaName()}";
+
         fishySteamworks.SetClientAddress(SteamUser.GetSteamID().ToString());
         fishySteamworks.StartConnection(true);
 
@@ -65,12 +70,13 @@ public class SteamManager : MonoBehaviour
         lobbyID = callback.m_ulSteamIDLobby;
 
         fishySteamworks.SetClientAddress(SteamMatchmaking.GetLobbyData(new CSteamID(lobbyID), "HostAddress"));
+        if (LobbyTitle) LobbyTitle.text = $"{SteamMatchmaking.GetLobbyData(new CSteamID(lobbyID), "name")}";
+
         fishySteamworks.StartConnection(false);
     }
 
     public void OpenInviteGUI()
     {
-        if (lobbyID != default)
             SteamFriends.ActivateGameOverlayInviteDialog(new CSteamID(lobbyID));
     }
 

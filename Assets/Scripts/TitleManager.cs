@@ -29,4 +29,11 @@ public class TitleManager : MonoBehaviour
             LobbyButtons?.SetActive(true);
             eventSystem?.SetSelectedGameObject(buttonToSelect);
     }
+
+    public void LeaveButton(GameObject buttonToSelect)
+    {
+            LobbyButtons?.SetActive(false);
+            InitialButtons?.SetActive(true);
+            eventSystem?.SetSelectedGameObject(buttonToSelect);
+    }
 }
