@@ -1312,10 +1312,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 2109486282}
-    m_SelectOnDown: {fileID: 227833842}
+    m_SelectOnUp: {fileID: 717891638}
+    m_SelectOnDown: {fileID: 1029643602}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -1445,10 +1445,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 2109486282}
-    m_SelectOnDown: {fileID: 227833842}
+    m_SelectOnUp: {fileID: 809701864}
+    m_SelectOnDown: {fileID: 658273695}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -1712,10 +1712,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 2109486282}
-    m_SelectOnDown: {fileID: 227833842}
+    m_SelectOnUp: {fileID: 1029643602}
+    m_SelectOnDown: {fileID: 717891638}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -1920,10 +1920,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 2109486282}
-    m_SelectOnDown: {fileID: 227833842}
+    m_SelectOnUp: {fileID: 658273695}
+    m_SelectOnDown: {fileID: 809701864}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -2012,6 +2012,7 @@ GameObject:
   - component: {fileID: 1063933161}
   - component: {fileID: 1063933163}
   - component: {fileID: 1063933164}
+  - component: {fileID: 1063933165}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -2080,6 +2081,20 @@ MonoBehaviour:
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
   m_ScrollDeltaPerTick: 6
+--- !u!114 &1063933165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063933160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9d7ac073d041fe4b8f8f304829475cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitialButtons: {fileID: 1588166964}
+  LobbyButtons: {fileID: 254720157}
 --- !u!1 &1164552975
 GameObject:
   m_ObjectHideFlags: 0
@@ -2994,6 +3009,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: TestScene
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1063933165}
+        m_TargetAssemblyTypeName: TitleManager, Assembly-CSharp
+        m_MethodName: StartButton
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 809701862}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2109486283

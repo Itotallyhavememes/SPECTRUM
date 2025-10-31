@@ -88,7 +88,7 @@ public class PlayerController : NetworkBehaviour
         }
         else
         {
-            gameObject.GetComponent<Rigidbody2D>().gravityScale = -2f;
+            gameObject.GetComponent<Rigidbody2D>().gravityScale = 2f;
             gameObject.GetComponent<PlayerController>().enabled = false;
         }
 
