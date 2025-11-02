@@ -1,4 +1,5 @@
 using FishNet.Object;
+using FishNet.Object.Synchronizing;
 using System;
 using System.Collections;
 using Unity.VisualScripting;
@@ -38,14 +39,9 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private float friction;
 
     [Header("--- Collision ---")]
-    [SerializeField] float groundDist;
-    [SerializeField] Vector2 groundedBox;
-    [SerializeField] float leftDist;
-    [SerializeField] Vector2 leftBox;
-    [SerializeField] float rightDist;
-    [SerializeField] Vector2 rightBox;
-    [SerializeField] float upDist;
-    [SerializeField] Vector2 upBox;
+    [SerializeField] float sideOffset;
+    [SerializeField] float sideDist;
+    [SerializeField] float verticalDist;
 
     [Header("--- Sounds ---")]
     [SerializeField] AudioClip jumpSFX;
@@ -67,8 +63,9 @@ public class PlayerController : NetworkBehaviour
     InputAction moveACT, upACT, rollACT;
     private bool canRoll;
     private bool isRolling;
-    CollisionSide flags;
     private bool isOwner;
+    bool walljumping;
+    private readonly SyncVar<bool> spriteFlipped = new SyncVar<bool>(new SyncTypeSettings(WritePermission.ClientUnsynchronized, ReadPermission.ExcludeOwner));
 
     public override void OnStartClient()
     {
@@ -121,22 +118,17 @@ public class PlayerController : NetworkBehaviour
         audRunSrc.outputAudioMixerGroup = audJumpSrc.outputAudioMixerGroup = audSrc.outputAudioMixerGroup;
 
         canRoll = true;
+
+        spriteFlipped.OnChange += OnSpriteFlipChanged;
     }
 
-    private void OnDestroy()
-    {
-        if (isOwner)
-        {
-            upACT.performed -= Jump;
-            rollACT.performed -= RollAction;
-        }
-    }
-
-    bool walljumping;
+    [ServerRpc(RunLocally = true)]
+    private void OnSpriteFlipChanged(bool prev, bool next, bool asServer) => spriteRenderer.flipX = next;
+    private void SetSpriteFlipped(bool value) => spriteFlipped.Value = value;
 
     void FixedUpdate()
     {
-        isGrounded = CheckGrounded(8); //Layer 8 = 256 = Collidable objects (walls, floors, etc.)
+        isGrounded = CheckVerticalCollision(8, false); //Layer 8 = 256 = Collidable objects (walls, floors, etc.)
 
         if (!isGrounded)
         {
@@ -159,8 +151,16 @@ public class PlayerController : NetworkBehaviour
 
         if (!isRolling)
         {
-            if (movement.x < 0) spriteRenderer.flipX = true;
-            if (movement.x > 0) spriteRenderer.flipX = false;
+            if (movement.x < 0)
+            {
+                spriteRenderer.flipX = true;
+                SetSpriteFlipped(true);
+            }
+            if (movement.x > 0)
+            {
+                spriteRenderer.flipX = false;
+                SetSpriteFlipped(false);
+            }
         }
         else
             curVel.x = movement.x = rollSpeed * (spriteRenderer.flipX ? -1 : 1);
@@ -182,12 +182,12 @@ public class PlayerController : NetworkBehaviour
         charRB.gravityScale = curVel.y;
         charRB.velocity = (curVel * Time.deltaTime) / 0.02f;
 
-        if (CheckAbove(8) && !isGrounded && curVel.y > 0)
+        if (CheckVerticalCollision(8, true) && !isGrounded && curVel.y > 0)
         {
             curVel.y = 0f;
         }
 
-        if ((CheckSides(CollisionSide.Left, 8) || CheckSides(CollisionSide.Right, 8)) && !isGrounded && !walljumping)
+        if ((CheckSideCollision(CollisionSide.Left, 8) || CheckSideCollision(CollisionSide.Right, 8)) && !isGrounded && !walljumping)
         {
             curVel.x = 0f;
         }
@@ -202,7 +202,7 @@ public class PlayerController : NetworkBehaviour
             audSrc.PlayOneShot(jumpSFX);
             curVel.y = jumpStrength;
         }
-        else if (CheckSides(CollisionSide.Left, 8))
+        else if (CheckSideCollision(CollisionSide.Left, 8))
         {
             walljumping = true;
             curJumpCt = 0;
@@ -214,7 +214,7 @@ public class PlayerController : NetworkBehaviour
 
             spriteRenderer.flipX = false;
         }
-        else if (CheckSides(CollisionSide.Right, 8))
+        else if (CheckSideCollision(CollisionSide.Right, 8))
         {
             walljumping = true;
             curJumpCt = 0;
@@ -272,62 +272,51 @@ public class PlayerController : NetworkBehaviour
         runSoundPlaying = false;
     }
 
-    public bool CheckSides(CollisionSide side, int layerMask)
+    public bool CheckSideCollision(CollisionSide side, int layerMask)
     {
         int mask = (int)Mathf.Pow(2, layerMask);
 
-        Vector2 left = new Vector2(collBox.bounds.min.x + 0.2f, collBox.bounds.min.y + 0.2f);
-        Vector2 right = new Vector2(collBox.bounds.max.x - 0.2f, collBox.bounds.min.y + 0.2f);
-
-        float dist = 0.35f;
-        RaycastHit2D raycastHit2D = default(RaycastHit2D);
+        Vector2 left = new Vector2(collBox.bounds.min.x, collBox.bounds.min.y + sideOffset);
+        Vector2 right = new Vector2(collBox.bounds.max.x, collBox.bounds.min.y + sideOffset);
 
         if (side == CollisionSide.Left)
         {
-            Debug.DrawLine(left, left + Vector2.left * dist, Color.cyan, 0.15f);
-            raycastHit2D = Physics2D.Raycast(left, Vector2.left, dist, mask);
+            Debug.DrawLine(left, left + Vector2.left * sideDist, Color.cyan);
+            return Physics2D.Raycast(left, Vector2.left, sideDist, mask).collider;
         }
         else if (side == CollisionSide.Right)
         {
-            Debug.DrawLine(right, right + Vector2.right * dist, Color.cyan, 0.15f);
-            raycastHit2D = Physics2D.Raycast(right, Vector2.right, dist, mask);
+            Debug.DrawLine(right, right + Vector2.right * sideDist, Color.cyan);
+            return Physics2D.Raycast(right, Vector2.right, sideDist, mask).collider;
         }
 
-        return raycastHit2D.collider;
+        return false;
     }
 
-    public bool CheckGrounded(int layer)
+    public bool CheckVerticalCollision(int layer, bool up)
     {
         int mask = (int)MathF.Pow(2, layer);
 
-        Vector2 left = new Vector2(collBox.bounds.min.x, collBox.bounds.center.y);
-        Vector2 center = collBox.bounds.center;
-        Vector2 right = new Vector2(collBox.bounds.max.x, collBox.bounds.center.y);
+        Vector2 left = new Vector2(collBox.bounds.min.x, (up) ? collBox.bounds.max.y : collBox.bounds.min.y);
+        Vector2 center = new Vector2(collBox.bounds.center.x, (up) ? collBox.bounds.max.y : collBox.bounds.min.y);
+        Vector2 right = new Vector2(collBox.bounds.max.x, (up) ? collBox.bounds.max.y : collBox.bounds.min.y);
 
-        float dist = collBox.bounds.extents.y + 0.16f;
+        Vector2 direction = up ? Vector2.up : Vector2.down;
 
-        Debug.DrawRay(left, Vector2.down, Color.white);
-        Debug.DrawRay(center, Vector2.down, Color.white);
-        Debug.DrawRay(right, Vector2.down, Color.white);
+        Debug.DrawLine(left, left + direction * verticalDist, Color.white);
+        Debug.DrawLine(center, center + direction * verticalDist, Color.white);
+        Debug.DrawLine(right, right + direction * verticalDist, Color.white);
 
-        return Physics2D.Raycast(left, Vector2.down, dist, mask).collider || 
-            Physics2D.Raycast(center, Vector2.down, dist, mask).collider || Physics2D.Raycast(right, Vector2.down, dist, mask).collider;
+        return Physics2D.Raycast(left, direction, verticalDist, mask).collider ||
+            Physics2D.Raycast(center, direction, verticalDist, mask).collider || Physics2D.Raycast(right, direction, verticalDist, mask).collider;
     }
 
-    public bool CheckAbove(int layer)
+    private void OnDestroy()
     {
-        int mask = (int)MathF.Pow(2, layer);
-        Vector2 vec = new Vector2(collBox.bounds.min.x, collBox.bounds.center.y);
-        Vector2 vec2 = collBox.bounds.center;
-        Vector2 vec3 = new Vector2(collBox.bounds.max.x, collBox.bounds.center.y);
-
-        float dist = collBox.bounds.extents.y + 0.16f;
-
-        Debug.DrawRay(vec, Vector2.up, Color.blue);
-        Debug.DrawRay(vec2, Vector2.up, Color.blue);
-        Debug.DrawRay(vec3, Vector2.up, Color.blue);
-
-        return Physics2D.Raycast(vec, Vector2.up, dist, mask).collider || 
-            Physics2D.Raycast(vec2, Vector2.up, dist, mask).collider || Physics2D.Raycast(vec3, Vector2.up, dist, mask).collider;
+        if (isOwner)
+        {
+            upACT.performed -= Jump;
+            rollACT.performed -= RollAction;
+        }
     }
 }

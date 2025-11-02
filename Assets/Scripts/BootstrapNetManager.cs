@@ -20,7 +20,7 @@ public class BootstrapNetManager : NetworkBehaviour
     {
         instance = this;
 
-        ChangePlayerSpawnData();
+       // ChangePlayerSpawnData();
 
         //SceneManager.OnClientPresenceChangeEnd += ClientPresenceChangeEnd;
     }
@@ -32,6 +32,8 @@ public class BootstrapNetManager : NetworkBehaviour
 
     static void SpawnPlayers(NetworkConnection connection)
     {
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == GameManager.instance.titleSceneName) return;
+
         var obj = Instantiate(instance.playerPrefab);
         instance.Spawn(obj, connection, instance.gameObject.scene);
     }
@@ -52,7 +54,7 @@ public class BootstrapNetManager : NetworkBehaviour
         SceneLoadData loadDat = new SceneLoadData(sceneName);
         NetworkConnection[] connections = instance.ServerManager.Clients.Values.ToArray();
         instance.SceneManager.LoadConnectionScenes(connections, loadDat);
-        instance.ChangePlayerSpawnData();
+        //instance.ChangePlayerSpawnData();
 
     }
 

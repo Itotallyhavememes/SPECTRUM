@@ -66,14 +66,9 @@ MonoBehaviour:
   wallJumpForce: 20
   airJumpCount: 1
   friction: 5
-  groundDist: 0.868
-  groundedBox: {x: 0.98, y: 0.005}
-  leftDist: 0.499
-  leftBox: {x: 0.005, y: 1.7}
-  rightDist: 0.499
-  rightBox: {x: 0.005, y: 1.7}
-  upDist: 0.866
-  upBox: {x: 0.98, y: 0.005}
+  sideOffset: 0.15
+  sideDist: 0.16
+  verticalDist: 0.16
   jumpSFX: {fileID: 8300000, guid: 64f4dc56dbf8d9a499917315a5584ecd, type: 3}
   wallJumpSFX: {fileID: 0}
   walkSFX: {fileID: 8300000, guid: 1774b8cf8892f3d4cbcede108d3b8819, type: 3}
@@ -357,6 +352,7 @@ MonoBehaviour:
   - {fileID: 5256791261306727376}
   - {fileID: 354242584586962928}
   - {fileID: -7524477922094045525}
+  - {fileID: -6666041014587301552}
   InitializedParentNetworkBehaviour: {fileID: 0}
   InitializedNestedNetworkObjects: []
   RuntimeParentNetworkBehaviour: {fileID: 0}
@@ -367,7 +363,7 @@ MonoBehaviour:
   _initializeOrder: 0
   _preventDespawnOnDisconnect: 0
   _defaultDespawnType: 0
-  _initializedTimestamp: -8584397305398956292
+  _initializedTimestamp: -8584395561429119445
   NetworkObserver: {fileID: 0}
   _enablePrediction: 0
   _predictionType: 0
@@ -449,9 +445,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8cac635f24954048aad3a6ff9110beb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 3
   _addedNetworkObject: {fileID: 5838616792687860316}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 5838616792687860316}
   IgnoredParameters: []
   _animator: {fileID: 1156112596482171325}
   _synchronizeWhenDisabled: 0

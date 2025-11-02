@@ -926,6 +926,7 @@ MonoBehaviour:
   titleSceneName: TitleScene
   gamePlayerPrefab: {fileID: 5838616792687860316, guid: adf7ad2788555ba4eb780479e60d1737, type: 3}
   lobbyPlayerPrefab: {fileID: 5838616792687860316, guid: adf7ad2788555ba4eb780479e60d1737, type: 3}
+  BootNetManagerPrefab: {fileID: 5778070011478819867, guid: 55670373dbf51174690cc6ce4f693863, type: 3}
 --- !u!4 &252869259
 Transform:
   m_ObjectHideFlags: 0
@@ -1026,108 +1027,6 @@ RectTransform:
   m_AnchoredPosition: {x: -350, y: -140}
   m_SizeDelta: {x: 300, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &417829511
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 417829512}
-  - component: {fileID: 417829514}
-  - component: {fileID: 417829513}
-  m_Layer: 0
-  m_Name: BootstrapNetManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &417829512
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 417829511}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 828.8487, y: 472.30447, z: -0.22879836}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &417829513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 417829511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <IsNested>k__BackingField: 0
-  WasActiveDuringEdit: 1
-  WasActiveDuringEdit_Set1: 1
-  <ComponentIndex>k__BackingField: 0
-  <PredictedSpawn>k__BackingField: {fileID: 0}
-  <PredictedOwner>k__BackingField: {fileID: 0}
-  NetworkBehaviours: []
-  InitializedParentNetworkBehaviour: {fileID: 0}
-  InitializedNestedNetworkObjects: []
-  RuntimeParentNetworkBehaviour: {fileID: 0}
-  RuntimeChildNetworkBehaviours: []
-  _isNetworked: 1
-  _isSpawnable: 1
-  _isGlobal: 0
-  _initializeOrder: 0
-  _preventDespawnOnDisconnect: 0
-  _defaultDespawnType: 0
-  _initializedTimestamp: 0
-  NetworkObserver: {fileID: 0}
-  _enablePrediction: 0
-  _predictionType: 0
-  _graphicalObject: {fileID: 0}
-  _detachGraphicalObject: 0
-  _enableStateForwarding: 1
-  _networkTransform: {fileID: 0}
-  _ownerInterpolation: 1
-  _ownerSmoothedProperties: 255
-  _adaptiveInterpolation: 3
-  _spectatorSmoothedProperties: 255
-  _spectatorInterpolation: 2
-  _enableTeleport: 0
-  _teleportThreshold: 1
-  <PrefabId>k__BackingField: 65535
-  <SpawnableCollectionId>k__BackingField: 0
-  <AssetPathHash>k__BackingField: 0
-  SceneId: 2105519311
-  SerializedTransformProperties:
-    Position: {x: 0, y: 0, z: 0}
-    Rotation: {x: 0, y: 0, z: 0, w: 0}
-    Scale: {x: 0, y: 0, z: 0}
-    IsValid: 0
---- !u!114 &417829514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 417829511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f631473fc8ecb14686f0a6a1a7cd6b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _componentIndexCache: 255
-  _addedNetworkObject: {fileID: 417829513}
-  _networkObjectCache: {fileID: 0}
-  playerPrefab: {fileID: 5838616792687860316, guid: adf7ad2788555ba4eb780479e60d1737, type: 3}
 --- !u!1 &579576317
 GameObject:
   m_ObjectHideFlags: 0
@@ -2641,6 +2540,71 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -180}
   m_SizeDelta: {x: 373.4, y: 460}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &1621444426
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1381576668158999110, guid: 55670373dbf51174690cc6ce4f693863, type: 3}
+      propertyPath: m_Name
+      value: BootstrapNetManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5704433684574080053, guid: 55670373dbf51174690cc6ce4f693863, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 828.8487
+      objectReference: {fileID: 0}
+    - target: {fileID: 5704433684574080053, guid: 55670373dbf51174690cc6ce4f693863, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 472.30447
+      objectReference: {fileID: 0}
+    - target: {fileID: 5704433684574080053, guid: 55670373dbf51174690cc6ce4f693863, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.22879836
+      objectReference: {fileID: 0}
+    - target: {fileID: 5704433684574080053, guid: 55670373dbf51174690cc6ce4f693863, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5704433684574080053, guid: 55670373dbf51174690cc6ce4f693863, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5704433684574080053, guid: 55670373dbf51174690cc6ce4f693863, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5704433684574080053, guid: 55670373dbf51174690cc6ce4f693863, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5704433684574080053, guid: 55670373dbf51174690cc6ce4f693863, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5704433684574080053, guid: 55670373dbf51174690cc6ce4f693863, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5704433684574080053, guid: 55670373dbf51174690cc6ce4f693863, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778070011478819867, guid: 55670373dbf51174690cc6ce4f693863, type: 3}
+      propertyPath: SceneId
+      value: 2042064367
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778070011478819867, guid: 55670373dbf51174690cc6ce4f693863, type: 3}
+      propertyPath: WasActiveDuringEdit
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 55670373dbf51174690cc6ce4f693863, type: 3}
 --- !u!1 &1847989429
 GameObject:
   m_ObjectHideFlags: 0
@@ -3285,6 +3249,7 @@ GameObject:
   - component: {fileID: 2335134606474547508}
   - component: {fileID: 5126323976687775773}
   - component: {fileID: 5126323976687775774}
+  - component: {fileID: 5126323976687775775}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -3322,7 +3287,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _serverBindAddress: 
   _port: 7770
-  _maximumClients: 9001
+  _maximumClients: 2
   _peerToPeer: 1
   _clientAddress: 
 --- !u!114 &5126323976687775774
@@ -3345,6 +3310,25 @@ MonoBehaviour:
     _latency: 0
     _outOfOrder: 0
     _packetLoss: 0
+--- !u!114 &5126323976687775775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2335134606474547515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d0962ead4b02a34aae248fccce671ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WriteSceneObjectDetails: 1
+  ValidateRpcLengths: 0
+  DisableObserversRpcLinks: 0
+  DisableTargetRpcLinks: 0
+  DisableServerRpcLinks: 0
+  DisableReplicateRpcLinks: 0
+  DisableReconcileRpcLinks: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -3353,4 +3337,4 @@ SceneRoots:
   - {fileID: 1872367364}
   - {fileID: 252869259}
   - {fileID: 2335134606474547513}
-  - {fileID: 417829512}
+  - {fileID: 1621444426}

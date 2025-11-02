@@ -17,7 +17,6 @@ public class KillBox : MonoBehaviour
             {
                 //TODO: kill player
             }
-
         }
     }
 }
