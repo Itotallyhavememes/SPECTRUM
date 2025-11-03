@@ -7,7 +7,7 @@ public class KillBox : MonoBehaviour
     [SerializeField] bool kills;
     [SerializeField] Transform returnLocation;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision?.gameObject.GetComponent<PlayerController>())
         {
