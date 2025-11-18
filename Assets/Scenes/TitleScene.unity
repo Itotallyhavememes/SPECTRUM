@@ -926,7 +926,6 @@ MonoBehaviour:
   titleSceneName: TitleScene
   gamePlayerPrefab: {fileID: 5838616792687860316, guid: adf7ad2788555ba4eb780479e60d1737, type: 3}
   lobbyPlayerPrefab: {fileID: 5838616792687860316, guid: adf7ad2788555ba4eb780479e60d1737, type: 3}
-  BootNetManagerPrefab: {fileID: 5778070011478819867, guid: 55670373dbf51174690cc6ce4f693863, type: 3}
 --- !u!4 &252869259
 Transform:
   m_ObjectHideFlags: 0
@@ -2003,7 +2002,7 @@ MonoBehaviour:
         m_MethodName: LeaveButton
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgument: {fileID: 2109486280}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0

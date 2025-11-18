@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -8,32 +6,55 @@ public class TitleManager : MonoBehaviour
 {
     [SerializeField] private GameObject InitialButtons;
     [SerializeField] private GameObject LobbyButtons;
+
     private EventSystem eventSystem;
 
-    // Start is called before the first frame update
+    public static TitleManager instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     void Start()
     {
         eventSystem = GetComponent<EventSystem>();
         LobbyButtons?.SetActive(false);
+
+        if (SteamManager.instance.GetLobbyID() != default)
+            StartButton(null);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void StartButton(GameObject buttonToSelect)
     {
-            InitialButtons?.SetActive(false);
-            LobbyButtons?.SetActive(true);
-            eventSystem?.SetSelectedGameObject(buttonToSelect);
+        GameObject obj;
+
+        if (buttonToSelect == null)
+            obj = LobbyButtons.GetComponentsInChildren<Button>()[0].gameObject;
+        else
+            obj = buttonToSelect;
+
+        InitialButtons?.SetActive(false);
+        LobbyButtons?.SetActive(true);
+        eventSystem?.SetSelectedGameObject(obj);
     }
 
     public void LeaveButton(GameObject buttonToSelect)
     {
-            LobbyButtons?.SetActive(false);
-            InitialButtons?.SetActive(true);
-            eventSystem?.SetSelectedGameObject(buttonToSelect);
+        GameObject obj;
+
+        if (buttonToSelect == null)
+            obj = LobbyButtons.GetComponentsInChildren<Button>()[0].gameObject;
+        else
+            obj = buttonToSelect;
+
+        LobbyButtons?.SetActive(false);
+        InitialButtons?.SetActive(true);
+        eventSystem?.SetSelectedGameObject(obj);
     }
 }

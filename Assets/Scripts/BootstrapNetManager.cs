@@ -7,12 +7,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using FishNet.Component.Spawning;
 using FishNet.Managing.Server;
+using Steamworks;
 
 public class BootstrapNetManager : NetworkBehaviour
 {
     public static BootstrapNetManager instance;
     private string currScene;
     [SerializeField] NetworkObject playerPrefab;
+
 
     string GetCurrentScene() => currScene;
 
@@ -38,22 +40,14 @@ public class BootstrapNetManager : NetworkBehaviour
         instance.Spawn(obj, connection, instance.gameObject.scene);
     }
 
-    private static void ClientPresenceChangeEnd(ClientPresenceChangeEventArgs args)
-    {
-        if (args.Added)
-        {
-
-        }
-    }
-
-
     public static void ChangeNetworkScene(string sceneName, string[] closingScenes)
     {
         instance.CloseScenes(closingScenes);
 
         SceneLoadData loadDat = new SceneLoadData(sceneName);
         NetworkConnection[] connections = instance.ServerManager.Clients.Values.ToArray();
-        instance.SceneManager.LoadConnectionScenes(connections, loadDat);
+        //instance.SceneManager.LoadConnectionScenes(connections, loadDat);
+        instance.SceneManager.LoadGlobalScenes(loadDat);
         //instance.ChangePlayerSpawnData();
 
     }
@@ -73,18 +67,18 @@ public class BootstrapNetManager : NetworkBehaviour
         }
     }
 
-    void ChangePlayerSpawnData()
+    public bool CurrentSceneIsTitle()
     {
-        var playerSpawner = SteamManager.instance.GetNetManager().GetComponent<PlayerSpawner>();
+        return UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "TitleScene";
+    }
 
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == GameManager.instance.titleSceneName)
-        {
-            playerSpawner.SetPlayerPrefab(GameManager.instance.lobbyPlayerPrefab);
-        }
-        else
-            playerSpawner.SetPlayerPrefab(GameManager.instance.gamePlayerPrefab);
+    public void LoadCurrSceneAsGlobal()
+    {
+        string[] name = { UnityEngine.SceneManagement.SceneManager.GetActiveScene().name };
+        instance.CloseScenes(name);
 
-        //playerSpawner.Spawns = GameManager.instance.levelSpawns[UnityEngine.SceneManagement.SceneManager.GetActiveScene().name];
+        SceneLoadData loadDat = new SceneLoadData(name);
 
+        SceneManager.LoadGlobalScenes(loadDat);
     }
 }

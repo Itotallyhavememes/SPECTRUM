@@ -1,7 +1,5 @@
 using FishNet.Managing;
-using FishNet.Managing.Scened;
 using Steamworks;
-using System;
 using TMPro;
 using UnityEngine;
 
@@ -16,6 +14,8 @@ public class SteamManager : MonoBehaviour
 
     ulong lobbyID;
 
+    public ulong GetLobbyID() => lobbyID;
+
     protected Callback<LobbyCreated_t> lobbyCreated;
     protected Callback<GameLobbyJoinRequested_t> joinRequested;
     protected Callback<LobbyEnter_t> lobbyEntered;
@@ -23,7 +23,7 @@ public class SteamManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-       
+
         DontDestroyOnLoad(gameObject);
 
     }
@@ -33,7 +33,6 @@ public class SteamManager : MonoBehaviour
         lobbyCreated = Callback<LobbyCreated_t>.Create(OnLobbyCreated);
         joinRequested = Callback<GameLobbyJoinRequested_t>.Create(OnJoinRequest);
         lobbyEntered = Callback<LobbyEnter_t>.Create(OnLobbyEntered);
-
     }
 
     public static void CreateLobby()
@@ -57,6 +56,8 @@ public class SteamManager : MonoBehaviour
         fishySteamworks.SetClientAddress(SteamUser.GetSteamID().ToString());
         fishySteamworks.StartConnection(true);
 
+        BootstrapNetManager.instance.LoadCurrSceneAsGlobal();
+
         Debug.Log("Finished Lobby Creation.");
     }
 
@@ -73,11 +74,18 @@ public class SteamManager : MonoBehaviour
         if (LobbyTitle) LobbyTitle.text = $"{SteamMatchmaking.GetLobbyData(new CSteamID(lobbyID), "name")}";
 
         fishySteamworks.StartConnection(false);
+
+        bool isTitleScene = BootstrapNetManager.instance.CurrentSceneIsTitle();
+
+        if (isTitleScene)
+        {
+            TitleManager.instance?.StartButton(null);
+        }
     }
 
     public void OpenInviteGUI()
     {
-            SteamFriends.ActivateGameOverlayInviteDialog(new CSteamID(lobbyID));
+        SteamFriends.ActivateGameOverlayInviteDialog(new CSteamID(lobbyID));
     }
 
     public void OpenJoinGUI()
@@ -94,13 +102,18 @@ public class SteamManager : MonoBehaviour
 
         if (netManager.IsServerStarted)
             fishySteamworks.StopConnection(true);
+
+        if (LobbyTitle) LobbyTitle.text = "";
     }
 
     public void StartGame()
     {
         string[] scenesToclose = { "TitleScene" };
 
+        SteamMatchmaking.SetLobbyJoinable(new CSteamID(lobbyID), false);
+
         BootstrapNetManager.ChangeNetworkScene("TestScene", scenesToclose);
+
     }
 
     private void OnApplicationQuit()
