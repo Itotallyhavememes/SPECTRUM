@@ -26,7 +26,7 @@ public class SteamManager : MonoBehaviour
     protected Callback<GameLobbyJoinRequested_t> joinRequested;
     protected Callback<LobbyEnter_t> lobbyEntered;
     protected Callback<SteamNetConnectionStatusChangedCallback_t> remoteConnectionChanged;
-    
+
     private void Awake()
     {
         instance = this;
@@ -83,15 +83,12 @@ public class SteamManager : MonoBehaviour
 
         BootstrapNetManager.instance.LoadCurrSceneAsGlobal();
 
-        //BootstrapNetManager.instance.plrCount = SteamMatchmaking.GetNumLobbyMembers(new CSteamID(lobbyID));
-        //updateLobbyText = true;
-        //if (LobbyTitle) LobbyTitle.text = $"{SteamFriends.GetPersonaName()}: {SteamMatchmaking.GetNumLobbyMembers(new CSteamID(lobbyID))}/2";
-
         Debug.Log("Finished Lobby Creation.");
     }
 
     private void OnJoinRequest(GameLobbyJoinRequested_t callback)
     {
+        if (lobbyID != default) LeaveLobby();
         SteamMatchmaking.JoinLobby(callback.m_steamIDLobby);
     }
 
@@ -106,24 +103,11 @@ public class SteamManager : MonoBehaviour
         bool isTitleScene = BootstrapNetManager.instance.CurrentSceneIsTitle();
 
         if (isTitleScene)
-        {
-            //if (LobbyTitle) LobbyTitle.text = $"{SteamMatchmaking.GetLobbyData(new CSteamID(lobbyID), "name")}: {SteamMatchmaking.GetNumLobbyMembers(new CSteamID(lobbyID))}/2";
-            //updateLobbyText = true;
-            //BootstrapNetManager.instance.plrCount = SteamMatchmaking.GetNumLobbyMembers(new CSteamID(lobbyID));
-
             TitleManager.instance?.StartButton(null);
-        }
     }
     public void OnServerRemoteConnectionState(NetworkConnection conn, RemoteConnectionStateArgs args)
     {
         Debug.LogWarning($"User has either left or joined, updating lobby title: {args.ConnectionState.ToString()}");
-
-        //if (args.ConnectionState == RemoteConnectionState.Started)
-        //    BootstrapNetManager.instance.plrCount = SteamMatchmaking.GetNumLobbyMembers(new CSteamID(SteamManager.instance.lobbyID));
-        //else if (args.ConnectionState == RemoteConnectionState.Stopped)
-        //    BootstrapNetManager.instance.plrCount = SteamMatchmaking.GetNumLobbyMembers(new CSteamID(SteamManager.instance.lobbyID)) - 1;
-
-        // if (LobbyTitle) LobbyTitle.text = $"{}: {SteamMatchmaking.GetNumLobbyMembers(new CSteamID(lobbyID))}/2";
     }
 
     public void OpenInviteGUI()
