@@ -3,7 +3,9 @@ using HeathenEngineering.SteamworksIntegration;
 using Steamworks;
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,9 +20,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] public NetworkObject gamePlayerPrefab;
     [SerializeField] public NetworkObject lobbyPlayerPrefab;
 
+    //Events
+    [DoNotSerialize] public UnityEvent<int> onPickupCurrency;
+
     private void Awake()
     {
         instance = this;
+
+        onPickupCurrency = (onPickupCurrency != null) ? onPickupCurrency : new UnityEvent<int>();
+
+        onPickupCurrency.AddListener(UpdateCurrency);
 
         DontDestroyOnLoad(gameObject);
     }
@@ -57,6 +66,12 @@ public class GameManager : MonoBehaviour
         //    Debug.Log("Set coins 15");
         //    Debug.Log("Coins: " + playerData.inventorySystem.Get<int>("Coins"));
         //}
+    }
+
+    private void UpdateCurrency(int amount)
+    {
+        //TODO: update coin HUD
+        Debug.Log($"Update Currency called: {amount}");
     }
     public static void QuitGame()
     {

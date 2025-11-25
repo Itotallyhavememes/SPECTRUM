@@ -13,13 +13,15 @@ public class DiscordManager : MonoBehaviour
     void Start()
     {
         discord = new Discord.Discord(1431113037359878207, (ulong)Discord.CreateFlags.NoRequireDiscord);
-        ChangeActivity();
+
+        if (discord != null)
+            ChangeActivity();
     }
 
     // Update is called once per frame
     void Update()
     {
-        discord.RunCallbacks();
+        discord?.RunCallbacks();
     }
 
     void ChangeActivity()
@@ -46,6 +48,6 @@ public class DiscordManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        discord.Dispose();
+        discord?.Dispose();
     }
 }

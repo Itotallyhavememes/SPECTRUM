@@ -1,19 +1,25 @@
+using FishNet;
 using FishNet.Connection;
 using FishNet.Managing.Scened;
 using FishNet.Object;
-using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using FishNet.Component.Spawning;
-using FishNet.Managing.Server;
+using FishNet.Object.Synchronizing;
+using FishNet.Transporting;
 using Steamworks;
+using System.Linq;
+using UnityEngine;
 
 public class BootstrapNetManager : NetworkBehaviour
 {
     public static BootstrapNetManager instance;
     private string currScene;
     [SerializeField] NetworkObject playerPrefab;
+    private readonly SyncVar<int> playerCount = new SyncVar<int>(new SyncTypeSettings(WritePermission.ClientUnsynchronized, ReadPermission.ExcludeOwner));
+
+    public int plrCount
+    {
+        get { return playerCount.Value; }
+        set { playerCount.Value = value; }
+    }
 
 
     string GetCurrentScene() => currScene;
@@ -21,11 +27,27 @@ public class BootstrapNetManager : NetworkBehaviour
     private void Awake()
     {
         instance = this;
+        playerCount.OnChange += OnPlayerCountChanged;
 
-       // ChangePlayerSpawnData();
+        // ChangePlayerSpawnData();
 
         //SceneManager.OnClientPresenceChangeEnd += ClientPresenceChangeEnd;
     }
+
+    private void Start()
+    {
+    }
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+
+    }
+
+    [ServerRpc(RunLocally = true)]
+    private void OnPlayerCountChanged(int prev, int next, bool asServer) => ChangePlrCount(next);
+    [ObserversRpc]
+    private void ChangePlrCount(int next)=>SteamManager.instance.LobbyTitle.text = $"{SteamMatchmaking.GetLobbyData(new CSteamID(SteamManager.instance.lobbyID), "name")}: {next}/2";
+    
 
     public override void OnSpawnServer(NetworkConnection connection)
     {

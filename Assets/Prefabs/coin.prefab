@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 372490859828141301}
   - component: {fileID: 2523041751509274745}
   - component: {fileID: 2852922487646337168}
-  - component: {fileID: 3023995640280025628}
   - component: {fileID: 9083380033328509231}
+  - component: {fileID: -459567667165969310}
   m_Layer: 7
   m_Name: coin
   m_TagString: Untagged
@@ -161,23 +161,6 @@ PolygonCollider2D:
       - {x: 0.07, y: -0.03}
       - {x: 0.07, y: 0.07}
   m_UseDelaunayMesh: 0
---- !u!114 &3023995640280025628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 742115329954184202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e6ffe126305b3348ace84a8237e195b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: Coin
-  description: Currency!
-  icon: {fileID: 0}
-  quantity: 1
-  pickupSound: {fileID: 8300000, guid: a770e216d231197459c2e7a4a2d30146, type: 3}
 --- !u!82 &9083380033328509231
 AudioSource:
   m_ObjectHideFlags: 0
@@ -274,3 +257,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-459567667165969310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742115329954184202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38b4d9af4c43f8c429916423dc8b1ad0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: Coin
+  description: Currency!
+  icon: {fileID: 0}
+  quantity: 1
+  pickupSound: {fileID: 8300000, guid: a770e216d231197459c2e7a4a2d30146, type: 3}

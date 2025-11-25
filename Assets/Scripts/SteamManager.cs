@@ -1,31 +1,55 @@
+using FishNet;
+using FishNet.Connection;
 using FishNet.Managing;
+using FishNet.Object;
+using FishNet.Transporting;
 using Steamworks;
+using System;
 using TMPro;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 public class SteamManager : MonoBehaviour
 {
     public static SteamManager instance;
 
-    [SerializeField] private TMP_Text LobbyTitle;
+    public TMP_Text LobbyTitle;
     [SerializeField] private NetworkManager netManager;
     [SerializeField] private FishySteamworks.FishySteamworks fishySteamworks;
     public NetworkManager GetNetManager() => netManager;
 
-    ulong lobbyID;
+    public ulong lobbyID { get; private set; }
 
     public ulong GetLobbyID() => lobbyID;
 
     protected Callback<LobbyCreated_t> lobbyCreated;
     protected Callback<GameLobbyJoinRequested_t> joinRequested;
     protected Callback<LobbyEnter_t> lobbyEntered;
-
+    protected Callback<SteamNetConnectionStatusChangedCallback_t> remoteConnectionChanged;
+    
     private void Awake()
     {
         instance = this;
 
-        DontDestroyOnLoad(gameObject);
+        string[] args = Environment.GetCommandLineArgs();
 
+        if (args.Length > 0)
+        {
+            string id = "";
+
+            for (int i = 0; i < args.Length; i++)
+            {
+                if (args[i] == "+connect_lobby" && i + 1 < args.Length)
+                {
+                    id = args[i + 1];
+                    Debug.Log($"LobbyID: {id}");
+                    SteamMatchmaking.JoinLobby(new CSteamID(ulong.Parse(id)));
+                }
+            }
+
+        }
+
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
@@ -33,7 +57,10 @@ public class SteamManager : MonoBehaviour
         lobbyCreated = Callback<LobbyCreated_t>.Create(OnLobbyCreated);
         joinRequested = Callback<GameLobbyJoinRequested_t>.Create(OnJoinRequest);
         lobbyEntered = Callback<LobbyEnter_t>.Create(OnLobbyEntered);
+        InstanceFinder.ServerManager.OnRemoteConnectionState += OnServerRemoteConnectionState;
+
     }
+
 
     public static void CreateLobby()
     {
@@ -51,12 +78,14 @@ public class SteamManager : MonoBehaviour
         SteamMatchmaking.SetLobbyData(new CSteamID(lobbyID), "HostAddress", SteamUser.GetSteamID().ToString());
         SteamMatchmaking.SetLobbyData(new CSteamID(lobbyID), "name", $"{SteamFriends.GetPersonaName()}'s Lobby");
 
-        if (LobbyTitle) LobbyTitle.text = $"{SteamFriends.GetPersonaName()}";
-
         fishySteamworks.SetClientAddress(SteamUser.GetSteamID().ToString());
         fishySteamworks.StartConnection(true);
 
         BootstrapNetManager.instance.LoadCurrSceneAsGlobal();
+
+        //BootstrapNetManager.instance.plrCount = SteamMatchmaking.GetNumLobbyMembers(new CSteamID(lobbyID));
+        //updateLobbyText = true;
+        //if (LobbyTitle) LobbyTitle.text = $"{SteamFriends.GetPersonaName()}: {SteamMatchmaking.GetNumLobbyMembers(new CSteamID(lobbyID))}/2";
 
         Debug.Log("Finished Lobby Creation.");
     }
@@ -71,7 +100,6 @@ public class SteamManager : MonoBehaviour
         lobbyID = callback.m_ulSteamIDLobby;
 
         fishySteamworks.SetClientAddress(SteamMatchmaking.GetLobbyData(new CSteamID(lobbyID), "HostAddress"));
-        if (LobbyTitle) LobbyTitle.text = $"{SteamMatchmaking.GetLobbyData(new CSteamID(lobbyID), "name")}";
 
         fishySteamworks.StartConnection(false);
 
@@ -79,8 +107,23 @@ public class SteamManager : MonoBehaviour
 
         if (isTitleScene)
         {
+            //if (LobbyTitle) LobbyTitle.text = $"{SteamMatchmaking.GetLobbyData(new CSteamID(lobbyID), "name")}: {SteamMatchmaking.GetNumLobbyMembers(new CSteamID(lobbyID))}/2";
+            //updateLobbyText = true;
+            //BootstrapNetManager.instance.plrCount = SteamMatchmaking.GetNumLobbyMembers(new CSteamID(lobbyID));
+
             TitleManager.instance?.StartButton(null);
         }
+    }
+    public void OnServerRemoteConnectionState(NetworkConnection conn, RemoteConnectionStateArgs args)
+    {
+        Debug.LogWarning($"User has either left or joined, updating lobby title: {args.ConnectionState.ToString()}");
+
+        //if (args.ConnectionState == RemoteConnectionState.Started)
+        //    BootstrapNetManager.instance.plrCount = SteamMatchmaking.GetNumLobbyMembers(new CSteamID(SteamManager.instance.lobbyID));
+        //else if (args.ConnectionState == RemoteConnectionState.Stopped)
+        //    BootstrapNetManager.instance.plrCount = SteamMatchmaking.GetNumLobbyMembers(new CSteamID(SteamManager.instance.lobbyID)) - 1;
+
+        // if (LobbyTitle) LobbyTitle.text = $"{}: {SteamMatchmaking.GetNumLobbyMembers(new CSteamID(lobbyID))}/2";
     }
 
     public void OpenInviteGUI()

@@ -926,6 +926,9 @@ MonoBehaviour:
   titleSceneName: TitleScene
   gamePlayerPrefab: {fileID: 5838616792687860316, guid: adf7ad2788555ba4eb780479e60d1737, type: 3}
   lobbyPlayerPrefab: {fileID: 5838616792687860316, guid: adf7ad2788555ba4eb780479e60d1737, type: 3}
+  onPickupCurrency:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &252869259
 Transform:
   m_ObjectHideFlags: 0
@@ -1862,7 +1865,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 4, y: 4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &986742409
 MonoBehaviour:
@@ -2141,6 +2144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InitialButtons: {fileID: 1588166964}
   LobbyButtons: {fileID: 254720157}
+  LobbyTitle: {fileID: 585582193}
 --- !u!1 &1164552975
 GameObject:
   m_ObjectHideFlags: 0

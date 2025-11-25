@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -6,6 +7,7 @@ public class TitleManager : MonoBehaviour
 {
     [SerializeField] private GameObject InitialButtons;
     [SerializeField] private GameObject LobbyButtons;
+    [SerializeField] private TMP_Text LobbyTitle;
 
     private EventSystem eventSystem;
 
@@ -14,6 +16,7 @@ public class TitleManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        SteamManager.instance.LobbyTitle = LobbyTitle;
     }
 
     void Start()

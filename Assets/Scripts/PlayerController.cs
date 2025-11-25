@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public enum CollisionSide
@@ -66,6 +67,7 @@ public class PlayerController : NetworkBehaviour
     private bool isOwner;
     bool walljumping;
     private readonly SyncVar<bool> spriteFlipped = new SyncVar<bool>(new SyncTypeSettings(WritePermission.ClientUnsynchronized, ReadPermission.ExcludeOwner));
+
 
     public override void OnStartClient()
     {

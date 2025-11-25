@@ -1,44 +1,55 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class ItemObject : MonoBehaviour
 {
-    [SerializeField] private string itemName;
-    [SerializeField] private string description;
-    [SerializeField] private Image icon;
-    [SerializeField] private int quantity;
-    [SerializeField] private AudioClip pickupSound;
+    [SerializeField] protected string itemName;
+    [SerializeField] protected string description;
+    [SerializeField] protected Image icon;
+    [SerializeField] protected int quantity;
+    [SerializeField] protected AudioClip pickupSound;
 
-    private AudioSource audSrc;
-    private SpriteRenderer spriteRenderer;
-    private PolygonCollider2D pCollider2D;
+    protected AudioSource audSrc;
+    protected SpriteRenderer spriteRenderer;
+    protected PolygonCollider2D pCollider2D;
 
-    private void Start()
+    public string GetName() => itemName;
+    public string GetDesc() => description;
+    public Image GetImg() => icon;
+    public int GetQuantity() => quantity;
+
+    protected virtual void Start()
     {
         audSrc = GetComponent<AudioSource>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         pCollider2D = GetComponent<PolygonCollider2D>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         PlayerController ctrl = collision.gameObject.GetComponent<PlayerController>();
 
-        if (ctrl != null && ctrl.IsOwner)
+        if (ctrl != null)
         {
             pCollider2D.enabled = false;
             spriteRenderer.enabled = false;
 
-            GameManager.instance.playerData.inventorySystem.Set(itemName, quantity);
+            if (ctrl.IsOwner)
+                StartCoroutine(Pickup());
 
-            StartCoroutine(Pickup());
         }
     }
 
-    private IEnumerator Pickup()
+    /// <summary>
+    /// Called when a valid player picks up an item.
+    /// </summary>
+    /// <returns></returns>
+    protected virtual IEnumerator Pickup()
     {
+        GameManager.instance.playerData.inventorySystem.Set(itemName, quantity);
+
         if (audSrc != null && pickupSound != null)
         {
             audSrc.PlayOneShot(pickupSound);
